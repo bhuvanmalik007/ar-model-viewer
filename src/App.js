@@ -12,9 +12,9 @@ import { CssBaseline } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import IconButton from "@material-ui/core/IconButton";
-// import gramophone from "./gramophone.usdz";
-import Darth_Vader_Helmet from "./Darth_Vader_Helmet.usdz";
-import Darth_Vader_Helmet_gltf from "./scene.gltf"
+import { models, skyBoxImg } from "./constants";
+// import Darth_Vader_Helmet from "./Darth_Vader_Helmet.usdz";
+// import Darth_Vader_Helmet_gltf from "./scene.gltf";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [darkMode, setDarkMode] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -66,6 +67,16 @@ function App() {
     [darkMode]
   );
 
+  const handleNext = (event) =>
+    carouselIndex + 1 === models.length
+      ? setCarouselIndex(0)
+      : setCarouselIndex(carouselIndex + 1);
+
+  const handlePrevious = (event) =>
+    carouselIndex === 0
+      ? setCarouselIndex(models.length - 1)
+      : setCarouselIndex(carouselIndex - 1);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -80,14 +91,12 @@ function App() {
               backgroundColor: "#70BCD1",
               "--progress-bar-color": "#00a152",
             }}
-            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-            ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
-            // src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-            // ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
+            src={models[carouselIndex].src}
+            ios-src={models[carouselIndex].iosSrc}
             alt="A 3D model of an astronaut"
             auto-rotate
             camera-controls
-            skybox-image="https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_HDR.hdr"
+            skybox-image={skyBoxImg}
             exposure={1.5}
             className={classes.modelViewer}
           />
@@ -106,13 +115,18 @@ function App() {
               aria-label="previous"
               className={classes.button}
               size="medium"
+              onClick={handlePrevious}
             >
               <ArrowBackIosIcon />
             </IconButton>
             <Typography variant="h4" className={classes.heading}>
-              Astronaut
+              {models[carouselIndex].name}
             </Typography>
-            <IconButton aria-label="next" className={classes.button}>
+            <IconButton
+              aria-label="next"
+              className={classes.button}
+              onClick={handleNext}
+            >
               <ArrowForwardIosIcon />
             </IconButton>
           </Box>
