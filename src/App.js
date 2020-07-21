@@ -7,7 +7,7 @@ import {
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Header from "./components/Header";
-import BodyBox from "./components/BodyBox";
+import CardBox from "./components/CardBox";
 import { CssBaseline } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -82,7 +82,7 @@ function App() {
       <CssBaseline />
       <div className={classes.root}>
         <Header darkMode={darkMode} setDarkMode={setDarkMode} title="Web AR" />
-        <BodyBox>
+        <CardBox>
           <model-viewer
             ar
             style={{
@@ -130,7 +130,7 @@ function App() {
               <ArrowForwardIosIcon />
             </IconButton>
           </Box>
-        </BodyBox>
+        </CardBox>
       </div>
     </ThemeProvider>
   );
