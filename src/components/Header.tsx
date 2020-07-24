@@ -9,10 +9,10 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(() => ({
   heading: {
     whiteSpace: "noWrap",
-    color: "#00a152"
+    color: "#00a152",
   },
 }));
 
