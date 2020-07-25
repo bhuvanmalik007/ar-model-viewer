@@ -7,16 +7,21 @@ import Typography from "@material-ui/core/Typography";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Grid from "@material-ui/core/Grid";
-import PropTypes from "prop-types";
 
-const useStyles = makeStyles(() => ({
+type HeaderProps = {
+  darkMode: boolean;
+  setDarkMode: Function;
+  title: string;
+};
+
+const useStyles = makeStyles({
   heading: {
-    whiteSpace: "noWrap",
+    whiteSpace: "nowrap",
     color: "#00a152",
   },
-}));
+});
 
-export default function Header({ darkMode, setDarkMode, title }) {
+export default function Header({ darkMode, setDarkMode, title }: HeaderProps) {
   const classes = useStyles();
 
   return (
@@ -50,8 +55,3 @@ export default function Header({ darkMode, setDarkMode, title }) {
     </AppBar>
   );
 }
-
-Header.propTypes = {
-  darkMode: PropTypes.bool.isRequired,
-  setDarkMode: PropTypes.func.isRequired,
-};
