@@ -15,8 +15,21 @@ import IconButton from "@material-ui/core/IconButton";
 import { models, skyBoxImg } from "./constants";
 // import Darth_Vader_Helmet from "./Darth_Vader_Helmet.usdz";
 // import Darth_Vader_Helmet_gltf from "./scene.gltf";
-
-const useStyles = makeStyles((theme) => ({
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "model-viewer": PersonInfoProps;
+    }
+  }
+}
+type PersonInfoProps = React.HTMLAttributes<HTMLElement> & {
+  ar: boolean;
+  style: Record<string, string | number>;
+  src: string;
+  alt: string;
+  exposure: number;
+};
+const useStyles = makeStyles((_theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -27,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#00a152",
   },
 }));
-
 function App() {
   const classes = useStyles();
   const [darkMode, setDarkMode] = useState(false);
@@ -66,17 +78,14 @@ function App() {
       }),
     [darkMode]
   );
-
-  const handleNext = (event) =>
+  const handleNext = () =>
     carouselIndex + 1 === models.length
       ? setCarouselIndex(0)
       : setCarouselIndex(carouselIndex + 1);
-
-  const handlePrevious = (event) =>
+  const handlePrevious = () =>
     carouselIndex === 0
       ? setCarouselIndex(models.length - 1)
       : setCarouselIndex(carouselIndex - 1);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -98,7 +107,6 @@ function App() {
             camera-controls
             skybox-image={skyBoxImg}
             exposure={1.5}
-            className={classes.modelViewer}
           />
           <Box
             flexWrap="nowrap"
@@ -119,9 +127,7 @@ function App() {
             >
               <ArrowBackIosIcon />
             </IconButton>
-            <Typography variant="h4" className={classes.heading}>
-              {models[carouselIndex].name}
-            </Typography>
+            <Typography variant="h4">{models[carouselIndex].name}</Typography>
             <IconButton
               aria-label="next"
               className={classes.button}
@@ -135,5 +141,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

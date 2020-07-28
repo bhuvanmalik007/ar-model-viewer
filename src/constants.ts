@@ -2,8 +2,12 @@ import trooperIOS from "./St_Class.usdz";
 import trooper from "./st_class.glb";
 import predator from "./Predator_s.glb";
 import predatorIOS from "./Predator_S.usdz";
-
-export const models = [
+interface model {
+  name: string;
+  src: string;
+  iosSrc: string;
+}
+export const models: model[] = [
   {
     name: "Astronaut",
     src: "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
@@ -25,5 +29,5 @@ export const models = [
     iosSrc: predatorIOS,
   },
 ];
-export const skyBoxImg =
+export const skyBoxImg: string =
   "https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_HDR.hdr";
