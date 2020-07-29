@@ -40,7 +40,7 @@ const useStyles = makeStyles((_theme) => ({
     color: "#00a152",
   },
 }));
-function App() {
+export default function App() {
   const classes = useStyles();
   const [darkMode, setDarkMode] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
